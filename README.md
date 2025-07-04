@@ -17,43 +17,56 @@ R: jsonlite, DNAcopy
 
 ⚙️ Cài đặt WisecondorX
 ✅ Cài qua pip (phiên bản mới nhất):
-pip install -U git+https://github.com/CenterForMedicalGeneticsGhent/Wisecondorx
+  pip install -U git+https://github.com/CenterForMedicalGeneticsGhent/Wisecondorx
 ✅ Cài qua conda (có sẵn dependency R):
-conda install -c conda-forge -c bioconda wisecondorx
+  conda install -c conda-forge -c bioconda wisecondorx
 
 📁 Chuẩn bị dữ liệu
 1. Tải dữ liệu .sra từ NCBI:
-prefetch --max-size 50G SRRxxxxxxx
+  prefetch --max-size 50G SRRxxxxxxx
 2. Chuyển .sra sang .fastq:
-fasterq-dump SRRxxxxxxx --outdir fastq_files --split-files
+  fasterq-dump SRRxxxxxxx --outdir fastq_files --split-files
 
 🧬 Tạo tập mẫu tham chiếu
 Sau khi có ít nhất 10 .npz từ các mẫu âm tính tiến hành tạo dữ liệu tham chiếu:
-wisecondorx newref *.npz reference.npz
+  wisecondorx newref *.npz reference.npz
 
 🧪 Dự đoán bất thường mẫu thử
 wisecondorx predict sample1.npz reference.npz output_sample1 \
   --zscore 3 \
   --bed \
   --plot
+
 --zscore 3: ngưỡng phát hiện bất thường
+
 --bed: xuất kết quả dạng bảng
+
 --plot: xuất biểu đồ .png
 
 📤 Các tệp đầu ra
-Tệp	                                      Mô tả
-output_sample1_statistics.txt	    Thống kê tổng quan mẫu
-output_sample1_bins.bed	          Thông tin từng bin
-output_sample1_segments.bed	      Các đoạn copy number khác biệt
-output_sample1_aberrations.bed	  Đoạn có bất thường (z-score cao)
-chr*.png	                        Biểu đồ CNV theo từng nhiễm sắc thể
+output_sample1_statistics.txt: Thống kê tổng quan mẫu
+
+output_sample1_bins.bed: Thông tin từng bin
+
+output_sample1_segments.bed: Các đoạn copy number khác biệt
+
+output_sample1_aberrations.bed: Đoạn có bất thường (z-score cao)
+
+chr*.png: Biểu đồ CNV theo từng nhiễm sắc thể
+
 
 Diễn giải kết quả
+
 ratio.mean ≈ 0: bản sao bình thường
+
 z-score > ±3: nghi ngờ bất thường
+
 CPA score: đo mức độ bất thường toàn genome
+
 chrX, chrY:
+
   z ≈ -1000: không phát hiện → mất NST (ví dụ Turner)
+  
   z ≫ 0: tăng bản sao (ví dụ Triple X)
 
 📌 Ví dụ: Nhận định mẫu bình thường
