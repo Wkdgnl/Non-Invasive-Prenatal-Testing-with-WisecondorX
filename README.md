@@ -59,7 +59,9 @@ chrX, chrY:
 📌 Ví dụ: Nhận định mẫu bình thường
 ratio.mean ≈ 0, z-score thấp, không có đoạn bất thường trong .bed
 → không có dấu hiệu bất thường về số lượng bản sao.
+
 📌 Ví dụ: Nhận định hội chứng Down (trisomy 21)
 chr21 z-score ≫ 3, ratio.mean > 0.2 → nghi ngờ tăng bản sao ở NST 21
+
 📌 Ví dụ: Turner
 chrX z ≈ -1000, chrY z ≈ -1000 → mất 1 NST giới tính → Turner (45,X)
